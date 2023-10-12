@@ -7,8 +7,10 @@ function Calculator() {
   const handleClick = (value) => {
     if (value === "=") {
       setInput(eval(input).toString());
-    } else if (value === "C") {
+    } else if (value === "AC") {
       setInput("");
+    } else if (value === "Del") {
+      setInput(input.slice(0, -1));
     } else {
       setInput((prevState) => prevState + value);
     }
@@ -27,14 +29,20 @@ function Calculator() {
     "3",
     "-",
     "0",
-    "C",
+    "AC",
     "=",
     "+",
+    ".",
+    "Del",
   ];
   return (
     <div className="calculator">
       <div className="displaypanel">{input}</div>
-      <div className="buttons">{buttonlist.map()}</div>
+      <div className="buttons">
+        {buttonlist.map((label) => (
+          <Button key={label} onClick={handleClick} label={label} />
+        ))}
+      </div>
     </div>
   );
 }
